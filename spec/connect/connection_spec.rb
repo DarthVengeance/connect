@@ -12,9 +12,13 @@ describe SUSE::Connect::Connection do
       expect(secure_connection.http).to be_kind_of Net::HTTP
     end
 
-    it 'parse passed endpoint to http port and host' do
+    it 'parses passed endpoint to http port and host' do
       expect(secure_connection.http.port).to eq 443
       expect(secure_connection.http.address).to eq 'example.com'
+    end
+
+    it "uses SUSE's default, safe cipher suite" do
+      expect(secure_connection.http.ciphers).to eq 'DEFAULT_SUSE'
     end
 
     context :proxy_detected do
